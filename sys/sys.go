@@ -28,9 +28,8 @@ func Command(os string) func() {
 	if os == "darwin" {
 		return func() {
 			fmt.Println("darwin!")
-			cmd := "osascript -e 'display notification \"" + messages[getRandomNumber()] + "\" with title \"" + TITLE
-			exec.Command("sh", "-c", cmd).Output()
-
+			notification := fmt.Sprintf("display notification \"%s\" with title \"%s\" ", messages[getRandomNumber()], TITLE)
+			exec.Command("osascript", "-e", notification)
 		}
 
 	}
