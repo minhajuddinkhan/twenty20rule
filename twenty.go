@@ -9,7 +9,11 @@ import (
 )
 
 //RANGE range for rand num
-const RANGE int = 4
+const (
+	RANGE  int    = 4
+	PREFIX string = "notify-send "
+	TITLE  string = "Twenty Twenty Rule"
+)
 
 var messages = map[int]string{
 	0: "Get your eyes off the screen, Nerd.",
@@ -20,14 +24,14 @@ var messages = map[int]string{
 
 func main() {
 
-	gocron.Every(20).Minutes().Do(TwentyRule)
+	gocron.Every(1).Second().Do(TwentyRule)
 	<-gocron.Start()
 }
 
 //TwentyRule In the case of the eyes, the rule is to take 20 seconds to look at something 20 feet away (instead of your computer), and repeat this every 20 minutes.
 func TwentyRule() {
 
-	cmd := "notify-send TwentyTwentyRule " + messages[getRandomNumber()]
+	cmd := PREFIX + "\"" + TITLE + "\"" + " " + "\"" + messages[getRandomNumber()] + "\""
 	exec.Command("sh", "-c", cmd).Output()
 }
 
