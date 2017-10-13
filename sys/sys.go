@@ -2,47 +2,47 @@ package sys
 
 import (
 	"fmt"
-	"math/rand"
 	"os/exec"
-	"time"
+	"runtime"
 )
 
-const (
-	RANGE int    = 4
-	TITLE string = "Twenty Twenty Rule"
-)
-
-var (
-	messages = map[int]string{
-		0: "Get your eyes off the screen, Nerd.",
-		1: "You've been eyeing the screen too much, take a break",
-		2: "You need to see some green color, like plants or something.",
-		3: "All work and no play makes Jack dull.",
-	}
-)
-
-func Command(os string) func() {
-
-	fmt.Println(os)
-
-	if os == "darwin" {
-		return func() {
-			fmt.Println("darwin!")
-			notification := fmt.Sprintf("display notification \"%s\" with title \"%s\" ", messages[getRandomNumber()], TITLE)
-			exec.Command("osascript", "-e", notification)
-		}
-
-	}
-	return func() {
-
-		fmt.Println("running on linux")
-		cmd := "notify-send " + "\"" + TITLE + "\"" + " " + "\"" + messages[getRandomNumber()] + "\""
-		exec.Command("sh", "-c", cmd).Output()
-
-	}
+//OpSys interface for executing notifications from cmd
+type OpSys interface {
+	Execute()
 }
 
-func getRandomNumber() int {
+type linux struct {
+	messages map[int]string
+	title    string
+	index    int
+}
+type darwin struct {
+	messages map[int]string
+	title    string
+	index    int
+}
 
-	return rand.New(rand.NewSource(time.Now().UnixNano())).Intn(RANGE)
+func (d *darwin) Execute() {
+
+	notification := fmt.Sprintf("'display notification \"%s\" with title \"%s\"'", d.messages[d.index], d.title)
+	exec.Command("osascript", "-e", notification).Output()
+
+}
+func (l *linux) Execute() {
+
+	notification := fmt.Sprintf("notify-send \"%s\" \"%s\"", l.title, l.messages[l.index])
+	exec.Command("sh", "-c", notification).Output()
+
+}
+
+//Command returns a function for notification execution.
+func Command(messages map[int]string, num int, title string) (OpSys, error) {
+
+	if runtime.GOOS == "darwin" {
+		return &darwin{messages, title, num}, nil
+	}
+	if runtime.GOOS == "linux" {
+		return &linux{messages, title, num}, nil
+	}
+	return nil, fmt.Errorf("os not configured")
 }
