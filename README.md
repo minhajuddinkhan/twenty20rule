@@ -21,6 +21,8 @@ Give executable rights to the bash file and copy it to your binaries.
 
 2.  ``` cd twenty20rule && sudo chmod +x twenty && sudo cp twenty /usr/bin ```
 
+3. ``` twenty & ```
+
 ## Description 
 It's no secret that sitting all day damages your body, but figuring out a system to counteract that for yourself is tough. The New York Times suggests one simple rule you can employ is a variation on the 20-20 rule to reduce eyestrain, but with movement instead.
 
