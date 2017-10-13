@@ -16,7 +16,7 @@ var (
 	messages = map[int]string{
 		0: "Get your eyes off the screen, Nerd.",
 		1: "You've been eyeing the screen too much, take a break",
-		2: "You need to see some green color",
+		2: "You need to see some green color, like plants or something.",
 		3: "All work and no play makes Jack dull.",
 	}
 )
