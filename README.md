@@ -17,7 +17,7 @@ Clone the repository.
 
 1. ``` git clone https://github.com/minhajuddinkhan/twenty20rule ```
 
-Give executable rights to the bash file and copy it to your binaries.
+Give executable rights to the binary and copy it to your binaries.
 
 2.  ``` cd twenty20rule && sudo chmod +x twenty && sudo cp twenty /usr/bin ```
 
