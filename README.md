@@ -11,6 +11,12 @@ make sure  your ```$PATH``` has ```$GOPATH/bin```
 
 ``` $ twenty20rule & ```
 
+### Initialize everytime PC reboots?
+
+```      sudo echo "twenty20rule &" >> /etc/rc.local    ```
+
+
+
 ## Golang not configured?
 
 Clone the repository.
@@ -19,9 +25,8 @@ Clone the repository.
 
 Give executable rights to the binary and copy it to your binaries.
 
-2.  ``` cd twenty20rule && sudo chmod +x twenty && sudo cp twenty /usr/bin ```
+2.  ``` cd twenty20rule && sudo chmod +x run.sh && sudo bash run.sh ```
 
-3. ``` twenty & ```
 
 ## Description 
 It's no secret that sitting all day damages your body, but figuring out a system to counteract that for yourself is tough. The New York Times suggests one simple rule you can employ is a variation on the 20-20 rule to reduce eyestrain, but with movement instead.
