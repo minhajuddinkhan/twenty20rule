@@ -26,7 +26,7 @@ var (
 
 func main() {
 
-	gocron.Every(1).Second().Do(TwentyRule)
+	gocron.Every(20).Minutes().Do(TwentyRule)
 	<-gocron.Start()
 }
 
