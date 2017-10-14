@@ -8,7 +8,7 @@ import (
 
 //OpSys interface for executing notifications from cmd
 type OpSys interface {
-	Execute()
+	Execute() error
 }
 
 type linux struct {
@@ -22,16 +22,18 @@ type darwin struct {
 	index    int
 }
 
-func (d *darwin) Execute() {
+func (d *darwin) Execute() error {
 
-	notification := fmt.Sprintf("'display notification \"%s\" with title \"%s\"'", d.messages[d.index], d.title)
-	exec.Command("osascript", "-e", notification).Output()
+	notification := fmt.Sprintf("display notification \"%s\" with title \"%s\"", d.messages[d.index], d.title)
+	_, err := exec.Command("osascript", "-e", notification).Output()
+	return err
 
 }
-func (l *linux) Execute() {
+func (l *linux) Execute() error {
 
 	notification := fmt.Sprintf("notify-send \"%s\" \"%s\"", l.title, l.messages[l.index])
-	exec.Command("sh", "-c", notification).Output()
+	_, err := exec.Command("sh", "-c", notification).Output()
+	return err
 
 }
 

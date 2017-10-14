@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"os"
 	"time"
@@ -34,9 +35,14 @@ func TwentyRule() {
 
 	command, err := sys.Command(messages, getRandomNumber(), TITLE)
 	if err != nil {
+		fmt.Println(err)
 		os.Exit(1)
 	}
-	command.Execute()
+	err = command.Execute()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 
 }
 func getRandomNumber() int {
