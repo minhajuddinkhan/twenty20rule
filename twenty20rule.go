@@ -33,7 +33,7 @@ func main() {
 //TwentyRule In the case of the eyes, the rule is to take 20 seconds to look at something 20 feet away (instead of your computer), and repeat this every 20 minutes.
 func TwentyRule() {
 
-	command, err := sys.Command(messages, getRandomNumber(), TITLE)
+	command, err := sys.Command(messages[getRandomNumber()], TITLE)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)

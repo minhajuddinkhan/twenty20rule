@@ -12,39 +12,37 @@ type OpSys interface {
 }
 
 type linux struct {
-	messages map[int]string
+	messages string
 	title    string
-	index    int
 }
 type darwin struct {
-	messages map[int]string
+	messages string
 	title    string
-	index    int
 }
 
 func (d *darwin) Execute() error {
 
-	notification := fmt.Sprintf("display notification \"%s\" with title \"%s\"", d.messages[d.index], d.title)
+	notification := fmt.Sprintf("display notification \"%s\" with title \"%s\"", d.messages, d.title)
 	_, err := exec.Command("osascript", "-e", notification).Output()
 	return err
 
 }
 func (l *linux) Execute() error {
 
-	notification := fmt.Sprintf("notify-send \"%s\" \"%s\"", l.title, l.messages[l.index])
+	notification := fmt.Sprintf("notify-send \"%s\" \"%s\"", l.title, l.messages)
 	_, err := exec.Command("sh", "-c", notification).Output()
 	return err
 
 }
 
 //Command returns a function for notification execution.
-func Command(messages map[int]string, num int, title string) (OpSys, error) {
+func Command(messages string, title string) (OpSys, error) {
 
 	if runtime.GOOS == "darwin" {
-		return &darwin{messages, title, num}, nil
+		return &darwin{messages, title}, nil
 	}
 	if runtime.GOOS == "linux" {
-		return &linux{messages, title, num}, nil
+		return &linux{messages, title}, nil
 	}
 	return nil, fmt.Errorf("os not configured")
 }
