@@ -13,8 +13,9 @@ make sure  your ```$PATH``` has ```$GOPATH/bin```
 
 ### Initialize everytime PC reboots?
 
-```      sudo echo "twenty20rule &" >> /etc/rc.local    ```
+Add ``` "twenty20rule &"  ``` in ```/etc/rc.local``` before ```exit 0``` statement. (Linux)
 
+(open for how do to this in mac? lol)
 
 
 ## Golang not configured?
