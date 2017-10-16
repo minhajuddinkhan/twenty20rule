@@ -13,7 +13,7 @@ make sure  your ```$PATH``` has ```$GOPATH/bin```
 
 ### Initialize everytime PC reboots?
 
-Add ``` "twenty20rule &"  ``` in ```/etc/rc.local``` before ```exit 0``` statement. (Linux)
+Add ``` twenty20rule &  ``` in ```/etc/rc.local``` before ```exit 0``` statement. (Linux)
 
 (open for how do to this in mac? lol)
 
