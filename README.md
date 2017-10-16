@@ -1,6 +1,6 @@
 # twenty20rule
 
-Sends a desktop notification every twenty minutes based on the 20 20 rule. (Linux)
+Sends a desktop notification every twenty minutes based on the 20 20 rule.
 ## Setup
 
 ![alt text](https://image.ibb.co/cRX05b/Screenshot_from_2017_10_12_21_23_59.jpg)
